@@ -1,8 +1,11 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { authenticate } from "../shopify.server";
+import shopify from "../shopify.server";
 import db from "../db.server";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
+  const url = new URL(request.url);
+  const shopName: string = String(url.searchParams.get('shop'));
+  const authenticate = (await shopify(shopName)).authenticate
   const { topic, shop, session, admin } = await authenticate.webhook(request);
 
   if (!admin) {

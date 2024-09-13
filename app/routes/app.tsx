@@ -8,7 +8,7 @@ import '@shopify/discount-app-components/build/esm/styles.css';
 import polarisStyles from "@shopify/polaris/build/esm/styles.css?url";
 import {AppProvider as DiscountsProvider} from '@shopify/discount-app-components';
 
-import { authenticate } from "../shopify.server";
+import shopify, { appInstance } from "../shopify.server";
 
 export const links = () => [
   { rel: "stylesheet", href: polarisStyles },
@@ -16,9 +16,13 @@ export const links = () => [
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const url = new URL(request.url);
+  const shop: string = String(url.searchParams.get('shop'));
+  const authenticate = (await shopify(shop)).authenticate
   await authenticate.admin(request);
+  const appEntry = await appInstance(shop)
 
-  return json({ apiKey: process.env.SHOPIFY_API_KEY || "" });
+  return json({ apiKey: appEntry.clientId || "" });
 };
 
 export default function App() {

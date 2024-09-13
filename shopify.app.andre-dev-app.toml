@@ -1,19 +1,17 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "854598628bec72bdb351f56e7cb8b561"
-name = "andre-app-dev"
-handle = "andre-app-dev"
-application_url = "https://funky-whole-arachnid.ngrok-free.app"
+client_id = "d85a4d5a2e613af39ac2496229bda680"
+name = "andre-dev-app"
+handle = "andre-dev-app"
+application_url = "https://funky-whole-arachnid.ngrok-free.app/"
 embedded = true
 
 [build]
-automatically_update_urls_on_dev = false
-dev_store_url = "bc-andre-dev.myshopify.com"
 include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = ""
+scopes = "write_products"
 
 [auth]
 redirect_urls = [
@@ -23,7 +21,7 @@ redirect_urls = [
 ]
 
 [webhooks]
-api_version = "2024-04"
+api_version = "2023-10"
 
 [pos]
 embedded = false

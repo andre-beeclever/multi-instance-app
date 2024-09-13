@@ -1,4 +1,7 @@
-# beeclever App Template - Remix
+# multi instance app
+This app allows you to connect your codebase to multiple shopify custom apps.
+
+To add an app, create an entry in the database for the app (clientId, clientSecret)
 
 ## Additions to the Shopufy App Template - Remix
 
