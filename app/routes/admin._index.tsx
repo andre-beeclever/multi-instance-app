@@ -61,6 +61,11 @@ export default function AdminIndex() {
     ]}>
 
       <Card>
+        <BlockStack gap="300" inlineAlign="start">
+          <Text as="h2" variant="headingMd">Distribution</Text>
+          <Text as="p">Connect this apps functionality to multiple Shopify Custom Apps to distribute it to different clients.</Text>
+          <Button url="/admin/apps">Show connected apps</Button>
+        </BlockStack>
       </Card>
 
     </Page>
