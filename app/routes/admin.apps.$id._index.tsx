@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useActionData, useLoaderData, useNavigation, useSubmit } from "@remix-run/react";
+import { useActionData, useLoaderData, useNavigate, useNavigation, useSubmit } from "@remix-run/react";
 import {
   Page,
   Layout,
@@ -77,6 +77,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 export default function AdminApp() {
   const nav = useNavigation();
   const submit = useSubmit();
+  const navigate = useNavigate()
   const isLoading = ["loading", "submitting"].includes(nav.state) && nav.formMethod === "POST";
   const data = useActionData<typeof action>();
   const { app } = useLoaderData<typeof loader>()
@@ -103,8 +104,9 @@ export default function AdminApp() {
       </Card>
       
       <Card padding={"0"}>
-        <Box padding={"200"}>
-          <InlineStack align="end">
+        <Box padding={"400"} borderBlockEndWidth="025" borderColor="border">
+          <InlineStack align="space-between" blockAlign="center">
+              <Text as="h2" variant="headingMd">Connected shops</Text>
               <Button url={`/admin/apps/${app.id}/shops/new`} variant="tertiary" icon={DatabaseAddIcon}>Add shop</Button>
           </InlineStack>
         </Box>
@@ -131,9 +133,9 @@ export default function AdminApp() {
                 position={index}
               >
                 <IndexTable.Cell>
-                  <Text variant="bodyMd" fontWeight="bold" as="span">
-                    {name}
-                  </Text>
+                  <Button variant="plain" icon={ExternalIcon} dataPrimaryLink target="_blank" url={`https://admin.shopify.com/store/${name.split('.')[0]}/apps/${app.name}/app`}>
+                      {name}
+                  </Button>
                 </IndexTable.Cell>
                 
               </IndexTable.Row>

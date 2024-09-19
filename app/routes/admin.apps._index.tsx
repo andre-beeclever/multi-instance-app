@@ -20,6 +20,7 @@ import {
   Banner,
   ExceptionList,
   IndexTable,
+  Badge,
 } from "@shopify/polaris";
 import authenticator from "~/admin/auth.server";
 import {
@@ -66,6 +67,7 @@ export default function AdminApps() {
   const { apps } = useLoaderData<typeof loader>()
   return (
     <Page title="Apps" 
+    titleMetadata={<Badge tone="info">{String(apps.length)}</Badge>}
     backAction={{
       url: '/admin'
     }}
